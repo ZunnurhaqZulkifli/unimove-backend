@@ -13,11 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->command->info('Auto Resetting Database');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->command->call('migrate');
+
+        $this->command->call('db:wipe');
+        $this->command->call('migrate:refresh');
+
+        $this->command->info('Seeding Users');
+
+        $this->call([
+            UserSeeder::class,
+            BankSeeder::class,
+            DriverSeeder::class,
+            StudentSeeder::class,
+            // AttachUserType::class,
         ]);
     }
 }

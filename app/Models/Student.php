@@ -11,12 +11,10 @@ class Student extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'address',
-    ];
+
+    protected $guarded = ['id'];
+
+    protected $table = "students";
 
     // Relationships
 
