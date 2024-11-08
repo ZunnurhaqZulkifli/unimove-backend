@@ -18,6 +18,23 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // car brands and models
+        Schema::create('vehicle_brands', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('status')->default('active');
+            $table->timestamps();
+        });
+
+        Schema::create('vehicle_models', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('brand_id')->constrained('vehicle_brands')->cascadeOnDelete();
+            $table->string('name');
+
+            $table->string('status')->default('active');
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->nullableMorphs('typeable');
@@ -90,6 +107,8 @@ return new class extends Migration
         Schema::dropIfExists('wallets');
         Schema::dropIfExists('biometrics');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('vehicle_models');
+        Schema::dropIfExists('vehicle_brands');
         Schema::dropIfExists('banks');
     }
 };

@@ -17,11 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,6 +37,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'created_at' => 'datetime:Y-m-d',
+            'updated_at' => 'datetime:Y-m-d',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
@@ -50,7 +48,12 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->morphTo();
+        return $this->morphTo('typeable');
+    }
+
+    public function biometric()
+    {
+        return $this->hasMany(Biometric::class, 'user_id');
     }
 
     public function wallet()

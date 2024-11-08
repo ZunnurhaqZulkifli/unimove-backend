@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Lecturer extends Model
+class Biometric extends Model
 {
     //
 }

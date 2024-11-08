@@ -23,11 +23,15 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Seeding Users');
 
         $this->call([
-            UserSeeder::class,
             BankSeeder::class,
+            DestinationSeeder::class,
+            ReasonSeeder::class,
+            VehicleBrandsSeeder::class,
+            VehicleModelSeeder::class,
+            UserSeeder::class,
             DriverSeeder::class,
             StudentSeeder::class,
-            // AttachUserType::class,
+            AttachUserType::class,
         ]);
     }
 }

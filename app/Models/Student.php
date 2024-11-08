@@ -17,7 +17,11 @@ class Student extends Model
     protected $table = "students";
 
     // Relationships
-
+    public function user()
+    {
+        return $this->morphOne(User::class, 'profile');
+    }
+    
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class, 'id');

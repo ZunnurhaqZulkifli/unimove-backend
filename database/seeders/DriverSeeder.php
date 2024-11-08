@@ -18,18 +18,17 @@ class DriverSeeder extends Seeder
 
         $drivers = [
             [
-                'name'            => $user->name,
-                'nric'            => $user->username,
-                'phone'           => $user->email,
-                'driver_id'       => 'DRV 0001',
-                'license_no'      => 'SJD 1234',
-                'license_expiry'  => '2024',
-                'address'         => 'JALAN',
-                'profile_picture' => 'takde',
-                'ratings'         => 2,
-                'total_trips'     => 1,
-                'created_at'      => now(),
-                'updated_at'      => now(),
+                'name'           => $user->name,
+                'id_number'      => $user->username,
+                'phone'          => $user->email,
+                'driver_id'      => 'DRV 0001',
+                'license_no'     => 'SJD 1234',
+                'license_expiry' => '2024',
+                'address'        => 'JALAN',
+                'ratings'        => 2,
+                'total_trips'    => 1,
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
         ];
 

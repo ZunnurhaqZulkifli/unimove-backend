@@ -21,6 +21,7 @@ return new class extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code');
             $table->string('address');
             $table->decimal('price', 12,2)->default(0);
             $table->string('estimation-time');

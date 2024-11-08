@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LecturerResource\Pages;
-use App\Filament\Resources\LecturerResource\RelationManagers;
-use App\Models\Lecturer;
+use App\Filament\Resources\VehicleModelResource\Pages;
+use App\Filament\Resources\VehicleModelResource\RelationManagers;
+use App\Models\VehicleModel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,25 +13,30 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class LecturerResource extends Resource
+class VehicleModelResource extends Resource
 {
-    protected static ?string $model = Lecturer::class;
+    protected static ?string $model = VehicleModel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Driver Settings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('phone')->required(),
+                
+                Forms\Components\Select::make('brand_id')
+                    ->fromRelation('brand', 'name')
+                    ->required(),
+
                 Forms\Components\Select::make('status')
-                ->options([
-                    'active' => 'Active',
-                    'inactive' => 'Inactive',
-                ])
-                ->required(),
-                Forms\Components\TextInput::make('lecturer_id')->required(),
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -40,9 +45,8 @@ class LecturerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Name'),
-                Tables\Columns\TextColumn::make('phone')->label('Phone'),
+                Tables\Columns\TextColumn::make('brand.name')->label('Brand'),
                 Tables\Columns\TextColumn::make('status')->label('Status'),
-                Tables\Columns\TextColumn::make('lecturer_id')->label('Lecturer ID'),
             ])
             ->filters([
                 //
@@ -67,9 +71,9 @@ class LecturerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLecturers::route('/'),
-            'create' => Pages\CreateLecturer::route('/create'),
-            'edit' => Pages\EditLecturer::route('/{record}/edit'),
+            'index' => Pages\ListVehicleModels::route('/'),
+            'create' => Pages\CreateVehicleModel::route('/create'),
+            'edit' => Pages\EditVehicleModel::route('/{record}/edit'),
         ];
     }
 }

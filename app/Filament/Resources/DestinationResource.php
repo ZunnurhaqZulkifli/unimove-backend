@@ -19,12 +19,14 @@ class DestinationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Destination Settings';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('address')->required(),
+                Forms\Components\TextInput::make('code')->required(),
                 Forms\Components\TextInput::make('address')->required(),
                 Forms\Components\TextInput::make('price')->required(),
                 Forms\Components\TextInput::make('estimation-time')->required(),
@@ -40,6 +42,7 @@ class DestinationResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Name'),
+                Tables\Columns\TextColumn::make('code')->label('Slug'),
                 Tables\Columns\TextColumn::make('address')->label('Address'),
                 Tables\Columns\TextColumn::make('price')->label('Price'),
                 Tables\Columns\TextColumn::make('estimation-time')->label('Estimation Time'),

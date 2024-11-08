@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Wallet extends Model
+class VehicleModel extends Model
 {
     protected $guarded = ['id'];
 
-    public function user()
+    public function brand()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(VehicleBrand::class);
     }
 }

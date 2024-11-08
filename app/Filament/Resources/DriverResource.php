@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DriverResource\Pages;
-use App\Filament\Resources\DriverResource\RelationManagers;
 use App\Models\Driver;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,8 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DriverResource extends Resource
 {
@@ -20,12 +17,14 @@ class DriverResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Driver Settings';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('nric')->required(),
+                Forms\Components\TextInput::make('id_number')->required(),
                 Forms\Components\TextInput::make('phone')->required()->email(),
                 Forms\Components\TextInput::make('driver_id')->required(),
                 Forms\Components\TextInput::make('license_no')->required(),
@@ -49,7 +48,7 @@ class DriverResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Name'),
-                Tables\Columns\TextColumn::make('nric')->label('NRIC'),
+                Tables\Columns\TextColumn::make('id_number')->label('id_number'),
                 Tables\Columns\TextColumn::make('phone')->label('Phone'),
                 Tables\Columns\TextColumn::make('driver_id')->label('Driver ID'),
                 Tables\Columns\TextColumn::make('license_no')->label('License No'),

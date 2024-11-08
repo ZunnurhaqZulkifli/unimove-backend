@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookingStatusResource\Pages;
-use App\Filament\Resources\BookingStatusResource\RelationManagers;
-use App\Models\BookingStatus;
+use App\Filament\Resources\VehicleBrandResource\Pages;
+use App\Filament\Resources\VehicleBrandResource\RelationManagers;
+use App\Models\VehicleBrand;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,20 +13,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BookingStatusResource extends Resource
+class VehicleBrandResource extends Resource
 {
-    protected static ?string $model = BookingStatus::class;
+    protected static ?string $model = VehicleBrand::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Order Management';
+    protected static ?string $navigationGroup = 'Driver Settings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('description')->required(),
+                //
             ]);
     }
 
@@ -35,7 +34,7 @@ class BookingStatusResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Name'),
-                Tables\Columns\TextColumn::make('description')->label('Description'),
+                Tables\Columns\TextColumn::make('status')->label('Status'),
             ])
             ->filters([
                 //
@@ -60,9 +59,9 @@ class BookingStatusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookingStatuses::route('/'),
-            'create' => Pages\CreateBookingStatus::route('/create'),
-            'edit' => Pages\EditBookingStatus::route('/{record}/edit'),
+            'index' => Pages\ListVehicleBrands::route('/'),
+            'create' => Pages\CreateVehicleBrand::route('/create'),
+            'edit' => Pages\EditVehicleBrand::route('/{record}/edit'),
         ];
     }
 }
