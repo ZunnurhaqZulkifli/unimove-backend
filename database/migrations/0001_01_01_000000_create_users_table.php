@@ -39,7 +39,7 @@ return new class extends Migration
             $table->id();
             $table->nullableMorphs('typeable');
             $table->string('name');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('tac')->nullable(); // temporary access code for new account
@@ -50,11 +50,12 @@ return new class extends Migration
 
         Schema::create('biometrics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
             $table->boolean('face_id');
             $table->boolean('passcode');
             $table->boolean('fingerprint');
             $table->boolean('enabled')->default(false);
+            $table->string('passcode_number')->nullable();
             $table->timestamps();
         });
 

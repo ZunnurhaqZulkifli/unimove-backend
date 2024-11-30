@@ -24,7 +24,6 @@ class DriverResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('id_number')->required(),
                 Forms\Components\TextInput::make('phone')->required()->email(),
                 Forms\Components\TextInput::make('driver_id')->required(),
                 Forms\Components\TextInput::make('license_no')->required(),
@@ -48,7 +47,6 @@ class DriverResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Name'),
-                Tables\Columns\TextColumn::make('id_number')->label('id_number'),
                 Tables\Columns\TextColumn::make('phone')->label('Phone'),
                 Tables\Columns\TextColumn::make('driver_id')->label('Driver ID'),
                 Tables\Columns\TextColumn::make('license_no')->label('License No'),
@@ -82,6 +80,11 @@ class DriverResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canGloballySearch(): bool
+    {
+        return true;
     }
 
     public static function getPages(): array

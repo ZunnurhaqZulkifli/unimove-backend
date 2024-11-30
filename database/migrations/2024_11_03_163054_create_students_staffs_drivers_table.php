@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('id_number')->unique()->nullable(); // National ID
             $table->string('student_id')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
@@ -30,7 +29,6 @@ return new class extends Migration
 
         Schema::create('staffs', function (Blueprint $table) {
             $table->id();
-            $table->string('id_number')->unique()->nullable(); // National ID
             $table->string('staff_id')->unique()->nullable(); // 
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
@@ -48,7 +46,6 @@ return new class extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('id_number')->unique();
             $table->string('phone');
             $table->string('address');
             
@@ -75,9 +72,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('driver_id')->constrained();
             $table->string('plate_no')->unique();
-            $table->string('model');
-            $table->string('brand');
+            $table->foreignId('model_id')->constrained('vehicle_models')->cascadeOnDelete();
+            $table->foreignId('brand_id')->constrained('vehicle_brands')->cascadeOnDelete();
             $table->string('color');
+            $table->decimal('mileage', 12, 2);
             $table->string('status')->default('active');
             $table->timestamps();
             $table->softDeletes();

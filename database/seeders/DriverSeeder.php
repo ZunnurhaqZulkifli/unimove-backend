@@ -19,7 +19,6 @@ class DriverSeeder extends Seeder
         $drivers = [
             [
                 'name'           => $user->name,
-                'id_number'      => $user->username,
                 'phone'          => $user->email,
                 'driver_id'      => 'DRV 0001',
                 'license_no'     => 'SJD 1234',

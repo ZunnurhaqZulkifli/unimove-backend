@@ -49,10 +49,35 @@ class UserSeeder extends Seeder
                 'created_at'        => now(),
                 'updated_at'        => now(),
             ],
+
+            [
+                'name'              => 'Zunnurhaq',
+                'username'          => '010614010959',
+                'email'             => 'a',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('a'),
+                'remember_token'    => random_int(0, 100),
+                'created_at'        => now(),
+                'updated_at'        => now(),
+            ],
         ];
 
         foreach ($users as $user) {
             User::create($user);
+        }
+
+        foreach($users as $key => $user) {
+            $user = User::find($key + 1);
+
+            $user->biometric()->create([
+                    'face_id'        => false,
+                    'passcode'       => true,
+                    'fingerprint'    => false,
+                    'enabled'        => false,
+                    'passcode_number' => '0000',
+            ]);
+
+            $user->save();
         }
     }
 }

@@ -27,7 +27,6 @@ class StaffResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('staff_id')->required(),
-                Forms\Components\TextInput::make('id_number')->required(),
                 Forms\Components\TextInput::make('phone')->required(),
                 Forms\Components\TextInput::make('address')->required(),
                 Forms\Components\Select::make('status')
@@ -47,9 +46,6 @@ class StaffResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('staff_id')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('id_number')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('phone')

@@ -40,21 +40,21 @@ class UserResource extends Resource
                     ->live()
                     ->default('App\Models\Student')
                     ->required(),
+                    
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('username')->required(),
                 Forms\Components\TextInput::make('email')->required()->email(),
-                Forms\Components\TextInput::make('password')->password()->required(),
+                Forms\Components\TextInput::make('password')
+                    ->hiddenOn('edit')
+                    ->password()
+                    ->required(),
 
                 Grid::make(2)
                     ->label('Models')
-                    ->hiddenOn('edit')
+                    // ->hiddenOn('edit')
                     ->schema(fn(Get $get): array=> match ($get('typeable_type')) {
                         'App\Models\Student'        => [
                             Forms\Components\TextInput::make('student_id')
-                                ->required(),
-
-                            Forms\Components\TextInput::make('student_id_number')
-                                ->label('Id Number')
                                 ->required(),
 
                             Forms\Components\TextInput::make('student_phone')
@@ -69,10 +69,6 @@ class UserResource extends Resource
                             Forms\Components\TextInput::make('staff_id')
                                 ->required(),
 
-                            Forms\Components\TextInput::make('staff_id_number')
-                                ->label('Id Number')
-                                ->required(),
-
                             Forms\Components\TextInput::make('staff_phone')
                                 ->label('Phone')
                                 ->required(),
@@ -83,10 +79,6 @@ class UserResource extends Resource
                         ],
                         'App\Models\Driver'         => [
                             Forms\Components\TextInput::make('driver_id')
-                                ->required(),
-
-                            Forms\Components\TextInput::make('driver_id_number')
-                                ->label('Id Number')
                                 ->required(),
 
                             Forms\Components\TextInput::make('driver_phone')
@@ -222,7 +214,6 @@ class UserResource extends Resource
                             'App\Models\Student' => [
                                 TextEntry::make('profile.id')->label('Student ID'),
                                 TextEntry::make('profile.name')->label('Student Name'),
-                                TextEntry::make('profile.id_number')->label('Matric Number'),
                                 TextEntry::make('profile.phone')->label('Student Phone'),
                                 TextEntry::make('profile.address')->label('Student Address'),
                                 TextEntry::make('profile.status')->badge()
@@ -239,7 +230,6 @@ class UserResource extends Resource
                             'App\Models\Staff'   => [
                                 TextEntry::make('profile.id')->label('Staff ID'),
                                 TextEntry::make('profile.name')->label('Staff Name'),
-                                TextEntry::make('profile.id_number')->label('Staff Number'),
                                 TextEntry::make('profile.phone')->label('Staff Phone'),
                                 TextEntry::make('profile.address')->label('Staff Address'),
                                 TextEntry::make('profile.status')->badge()
@@ -256,7 +246,6 @@ class UserResource extends Resource
                             'App\Models\Driver'  => [
                                 TextEntry::make('profile.id')->label('Driver ID'),
                                 TextEntry::make('profile.name')->label('Driver Name'),
-                                TextEntry::make('profile.id_number')->label('Driver Number'),
                                 TextEntry::make('profile.phone')->label('Driver Phone'),
                                 TextEntry::make('profile.address')->label('Driver Address'),
                                 TextEntry::make('profile.driver_id')->label('Assigned Driver ID'),

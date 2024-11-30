@@ -22,7 +22,6 @@ class CreateUser extends CreateRecord
                 $model = Student::create([
                     'name'       => $data['name'],
                     'student_id' => $data['student_id'],
-                    'id_number'  => $data['student_id_number'],
                     'phone'      => $data['student_phone'],
                     'address'    => $data['student_address'],
                     'status'     => 'active',
@@ -35,7 +34,6 @@ class CreateUser extends CreateRecord
                 $model = Staff::create([
                     'name'      => $data['name'],
                     'staff_id'  => $data['staff_id'],
-                    'id_number' => $data['staff_id_number'],
                     'phone'     => $data['staff_phone'],
                     'address'   => $data['staff_address'],
                     'status'    => 'active',
@@ -48,7 +46,6 @@ class CreateUser extends CreateRecord
                 $model = Driver::create([
                     'name'           => $data['name'],
                     'driver_id'      => $data['driver_id'],
-                    'id_number'      => $data['driver_id_number'],
                     'phone'          => $data['driver_phone'],
                     'address'        => $data['driver_address'],
                     'license_no'     => $data['driver_license_no'],
