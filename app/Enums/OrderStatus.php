@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum OrderStatus: string
 {
-    case NEW = 'new';
-    case PENDING = 'pending';
+    case NEW = 'New';
+    case PENDING = 'Pending';
     case BOOKED = 'Booked';
 
     public static function options(): array

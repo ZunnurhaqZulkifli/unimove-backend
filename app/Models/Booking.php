@@ -12,4 +12,15 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function bookingDetails()
+    {
+        return $this->hasMany(BookingDetail::class);
+    }
+
 }

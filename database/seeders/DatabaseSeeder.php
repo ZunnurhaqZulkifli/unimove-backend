@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             VehicleModelSeeder::class,
             UserSeeder::class,
             DriverSeeder::class,
+            VehicleSeeder::class,
             StudentSeeder::class,
             AttachUserType::class,
         ]);

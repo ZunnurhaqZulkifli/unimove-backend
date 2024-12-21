@@ -29,7 +29,7 @@ class DestinationResource extends Resource
                 Forms\Components\TextInput::make('code')->required(),
                 Forms\Components\TextInput::make('address')->required(),
                 Forms\Components\TextInput::make('price')->required(),
-                Forms\Components\TextInput::make('estimation-time')->required(),
+                Forms\Components\TextInput::make('estimation_time')->required(),
                 Forms\Components\Select::make('status')->options([
                     'active' => 'Active',
                     'inactive' => 'Inactive',
@@ -45,7 +45,7 @@ class DestinationResource extends Resource
                 Tables\Columns\TextColumn::make('code')->label('Slug'),
                 Tables\Columns\TextColumn::make('address')->label('Address'),
                 Tables\Columns\TextColumn::make('price')->label('Price'),
-                Tables\Columns\TextColumn::make('estimation-time')->label('Estimation Time'),
+                Tables\Columns\TextColumn::make('estimation_time')->label('Estimation Time'),
                 Tables\Columns\TextColumn::make('status')->label('Status'),
             ])
             ->filters([

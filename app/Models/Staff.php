@@ -9,8 +9,8 @@ class Staff extends Model
     protected $guarded = ['id'];
     protected $table = 'staffs';
 
-    public function user()
+    public function orders()
     {
-        return $this->morphOne(User::class, 'profile');
+        return $this->hasMany(Order::class, 'orderable_id');
     }
 }

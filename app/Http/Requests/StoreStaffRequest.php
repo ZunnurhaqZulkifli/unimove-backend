@@ -23,7 +23,7 @@ class StoreStaffRequest extends FormRequest
     {
         return [
             'name'      => ['required'],
-            'staff_id'  => ['required', 'unique:staff'],
+            'staff_id'  => ['required', 'unique:staffs'],
             'phone'     => ['required'],
             'address'   => ['required'],
         ];

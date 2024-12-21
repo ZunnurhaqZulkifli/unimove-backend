@@ -40,11 +40,11 @@ class UserSeeder extends Seeder
 
               // Driver
             [
-                'name'              => 'Abu',
-                'username'          => '951127918819',
-                'email'             => 'abu1@gmail.com',
+                'name'              => 'Zunnurhaq Driver',
+                'username'          => '918238128312',
+                'email'             => 'b',
                 'email_verified_at' => now(),
-                'password'          => Hash::make('password'),
+                'password'          => Hash::make('b'),
                 'remember_token'    => random_int(0, 100),
                 'created_at'        => now(),
                 'updated_at'        => now(),
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
                     'passcode'       => true,
                     'fingerprint'    => false,
                     'enabled'        => false,
-                    'passcode_number' => '0000',
+                    'passcode_number' => '000000',
             ]);
 
             $user->save();

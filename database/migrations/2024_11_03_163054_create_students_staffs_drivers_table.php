@@ -70,7 +70,7 @@ return new class extends Migration
 
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained();
+            $table->foreignId('driver_id')->constrained()->cascadeOnDelete();
             $table->string('plate_no')->unique();
             $table->foreignId('model_id')->constrained('vehicle_models')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('vehicle_brands')->cascadeOnDelete();

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDriverRequest;
+use App\Http\Requests\StoreStaffRequest;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\StoreUserRequest;
-use App\Models\Biometric;
 use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Student;
@@ -19,6 +20,8 @@ class RegisterUserApi extends BaseApiController
     {
         $userValidator = new StoreUserRequest();
         $studentValidator = new StoreStudentRequest();
+        $staffValidator = new StoreStaffRequest();
+        $driverValidator = new StoreDriverRequest();
         $data = $request->all();
 
         $rules = $userValidator->rules();
@@ -53,26 +56,45 @@ class RegisterUserApi extends BaseApiController
                     break;
             
                 case 'App\Models\Staff':
-                    $model = Staff::create([
-                        'name'      => $data['name'],
-                        'staff_id'  => $data['staff_id'],
-                        'phone'     => $data['staff_phone'],
-                        'address'   => $data['staff_address'],
-                        'status'    => 'active',
-                    ]);
+
+                    $rules = $staffValidator->rules();
+    
+                    $validator = Validator::make([
+                        'name'       => $request->name,
+                        'staff_id'   => $request->staff_id,
+                        'phone'      => $request->phone,
+                        'address'    => $request->address,
+                    ], $rules);
+    
+                    if ($validator->fails()) {
+                        return $this->error($validator->errors(), 'Staff Validation Error', 400);
+                    }
+    
+                    $validatedStaffData = $validator->validated();
+                    $model = Staff::create($validatedStaffData);
             
                     $data['profile_type'] = 'App\Models\Staff';
                     break;
     
                 case 'App\Models\Driver':
-                    $model = Driver::create([
-                        'name'           => $data['name'],
-                        'driver_id'      => $data['driver_id'],
-                        'phone'          => $data['driver_phone'],
-                        'address'        => $data['driver_address'],
-                        'license_no'     => $data['driver_license_no'],
-                        'license_expiry' => $data['driver_license_expiry'],
-                    ]);
+
+                    $rules = $driverValidator->rules();
+    
+                    $validator = Validator::make([
+                        'name'           => $request->name,
+                        'driver_id'      => $request->driver_id,
+                        'phone'          => $request->phone,
+                        'address'        => $request->address,
+                        'license_no'     => $request->license_no,
+                        'license_expiry' => $request->license_expiry,
+                    ], $rules);
+    
+                    if ($validator->fails()) {
+                        return $this->error($validator->errors(), 'Driver Validation Error', 400);
+                    }
+    
+                    $validatedDriverData = $validator->validated();
+                    $model = Driver::create($validatedDriverData);
             
                     $data['profile_type'] = 'App\Models\Driver';
                     break;

@@ -56,7 +56,7 @@ class UpdateUserProfileApi extends BaseApiController
 
                     $validator = Validator::make([
                         'name'      => $user->name,
-                        'staff_id'  => $data['id'],
+                        'staff_id'  => $data['staff_id'],
                         'phone'     => $data['phone'],
                         'address'   => $data['address'],
                     ], $rules);
@@ -76,7 +76,7 @@ class UpdateUserProfileApi extends BaseApiController
 
                     $validator = Validator::make([
                         'name'           => $user->name,
-                        'driver_id'      => $data['id'],
+                        'driver_id'      => $data['driver_id'],
                         'phone'          => $data['phone'],
                         'address'        => $data['address'],
                         'license_no'     => $data['license_no'],
@@ -104,6 +104,12 @@ class UpdateUserProfileApi extends BaseApiController
             Wallet::create([
                 'user_id' => $user->id,
                 'balance' => 50.00,
+                'bank_id' => 1,
+                'card_number' => '1234567890123456',
+                'card_expiry' => '12/25',
+                'card_ccv' => '123',
+                'card_holder' => $user->name,
+                'card_type' => 'debit',
             ]);
         }
 

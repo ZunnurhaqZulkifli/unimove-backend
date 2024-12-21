@@ -17,4 +17,9 @@ class Driver extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Booking::class, 'accepted_by')->join('booking_details', 'bookings.id', '=', 'booking_details.booking_id');
+    }
 }

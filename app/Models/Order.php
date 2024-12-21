@@ -17,6 +17,11 @@ class Order extends Model
         return $this->morphTo('orderable');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function destination()
     {
         return $this->belongsTo(Destination::class, 'destination_id');
