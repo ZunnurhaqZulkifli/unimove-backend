@@ -43,8 +43,10 @@ class AcceptOrderApi extends BaseApiController
         $order->status = OrderStatus::BOOKED;
         $order->save();
 
-        $user_wallet = User::where('typeable_id', $order->owner->id)->first()->wallet;
-        $order_owner = User::where('typeable_id', $order->owner->id)->first();
+        $user = User::where('typeable_id', $order->owner->id)->first();
+
+        $user_wallet = $user->wallet;
+        $order_owner = $user->first();
 
         $calculate = new CalculateDataApi();
         
@@ -58,23 +60,23 @@ class AcceptOrderApi extends BaseApiController
         $c_data = json_decode($data, true);
 
         $model = BookingDetail::create([
-            'reference_code' => Booking::find($booking->id)->reference_code,
-            'user_id' => $order_owner->id,
-            'booking_id' => $booking->id,
-            'driver_id' => User::find($user->id)->profile->id,
-            'vehicle_id' => Vehicle::where('driver_id', User::find($user->id)->profile->id)->first()->id,
-            'user_wallet_id' => $user_wallet->id,
+            'reference_code'   => Booking::find($booking->id)->reference_code,
+            'user_id'          => $order_owner->id,
+            'booking_id'       => $booking->id,
+            'driver_id'        => User::find($user->id)->profile->id,
+            'vehicle_id'       => Vehicle::where('driver_id', User::find($user->id)->profile->id)->first()->id,
+            'user_wallet_id'   => $user_wallet->id,
             'driver_wallet_id' => Wallet::where('user_id', $user->id)->first()->id,
-            'destination_id' => Order::find($order->id)->dropoff_to,
-            'pickup_from' => Order::find($order->id)->pickup_from,
-            'pickup_time' => now(),
-            'dropoff_to' => Order::find($order->id)->dropoff_to,
-            'dropoff_time' => now(),
-            'price' => $c_data['data']['price'],
-            'estimation_time' => $c_data['data']['estimation_time'],
-            'distance' => $c_data['data']['distance'],
-            'cancellable' => true,
-            'created_at' => now(),
+            'destination_id'   => Order::find($order->id)->dropoff_to,
+            'pickup_from'      => Order::find($order->id)->pickup_from,
+            'pickup_time'      => now(),
+            'dropoff_to'       => Order::find($order->id)->dropoff_to,
+            'dropoff_time'     => now(),
+            'price'            => $c_data['data']['price'],
+            'estimation_time'  => $c_data['data']['estimation_time'],
+            'distance'         => $c_data['data']['distance'],
+            'cancellable'      => true,
+            'created_at'       => now(),
         ]);
 
         return $this->success([$order, $booking, $model], 'Order Accepted Successfully', 200);

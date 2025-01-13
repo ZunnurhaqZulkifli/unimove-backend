@@ -46,5 +46,37 @@ class StudentSeeder extends Seeder
 
             $user->save();
         }
+
+        $user2 = User::find(5);
+        $students2 = [
+            [
+                'student_id' => 'CS002',
+                'address' => 'JALAN RUMAH SAYA',
+                'name' => $user2->name,
+                'phone' => '0129391293',
+                'status' => 'active',
+                'verified' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ];
+
+        foreach ($students2 as $student) {
+            $profile  = Student ::create($student);
+            $user2->profile()->associate($profile);
+
+            Wallet::create([
+                'user_id' => $user2->id,
+                'balance' => 50.00,
+                'bank_id' => 1,
+                'card_number' => '123567812356',
+                'card_expiry' => '12/25',
+                'card_ccv' => '123',
+                'card_holder' => $user2->name,
+                'card_type' => 'debit',
+            ]);
+
+            $user2->save();
+        }
     }
 }

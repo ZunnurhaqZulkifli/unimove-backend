@@ -18,9 +18,9 @@ class Booking extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function bookingDetails()
+    public function bookingDetail()
     {
-        return $this->hasMany(BookingDetail::class);
+        return $this->hasOne(BookingDetail::class);
     }
 
 }

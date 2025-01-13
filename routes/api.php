@@ -3,8 +3,11 @@
 use App\Http\Controllers\Api\AcceptOrderApi;
 use App\Http\Controllers\Api\BiometricUserApiController;
 use App\Http\Controllers\Api\CalculateDataApi;
+use App\Http\Controllers\Api\CheckHasBooking;
+use App\Http\Controllers\Api\CheckHasOrder;
 use App\Http\Controllers\Api\DeleteUserApi;
 use App\Http\Controllers\Api\GetBookingApi;
+use App\Http\Controllers\Api\GetDashboardImagesApi;
 use App\Http\Controllers\Api\GetDestinationsApi;
 use App\Http\Controllers\Api\GetMyOrdersApi;
 use App\Http\Controllers\Api\GetOrdersApi;
@@ -35,8 +38,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [LoginUserApi::class, 'login'])->name('login');
     Route::post('request-tac', [TacApiController::class, 'sendTac'])->name('request-tac');
     Route::get('destinations', [GetDestinationsApi::class, 'index'])->name('destinations');
-    Route::get('orders', [GetOrdersApi::class, 'index'])->name('orders');
+    Route::get('orders', [GetOrdersApi::class, 'index'])->name('orders'); 
     Route::post('calculate-destination', [CalculateDataApi::class, 'calculate'])->name('calculate-destination');
+    Route::get('dashboard-images', [GetDashboardImagesApi::class, 'index'])->name('dashboard-images');
 });
 
 Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
@@ -57,10 +61,15 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
 // student / staff / drivers
 Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
    
-    // destination / booking controller
+   // destination / booking controller
    Route::post('order-ride', [OrderRideApi::class, 'order'])->name('order-ride');
    Route::post('accept-order', [AcceptOrderApi::class, 'accept'])->name('accept-order');
-   Route::get('my-orders', [GetMyOrdersApi::class, 'index'])->name('my-orders');
+   
+   Route::get('check-has-order', [CheckHasOrder::class, 'index'])->name('check-has-order'); // check if user has an order
+   Route::post('cancel-order', [AcceptOrderApi::class, 'cancel'])->name('cancel-order');
+
+   Route::get('my-current-order', [GetMyOrdersApi::class, 'index'])->name('my-orders'); // orders dedicated to the user
+
    Route::get('get-bookings', [GetBookingApi::class, 'index'])->name('my-bookings');
 
 });

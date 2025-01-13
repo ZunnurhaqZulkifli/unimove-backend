@@ -26,7 +26,8 @@ return new class extends Migration
             $table->integer('y');
             $table->decimal('price', 12,2)->default(0);
             $table->decimal('estimation_time', 2,0)->default(0);
-            $table->string('image')->nullable();
+            $table->string('image_l')->nullable();
+            $table->string('image_p')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
             $table->softDeletes();

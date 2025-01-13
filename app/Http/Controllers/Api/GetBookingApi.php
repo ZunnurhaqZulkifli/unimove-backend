@@ -20,15 +20,24 @@ class GetBookingApi extends BaseApiController
         //     ->first();
         
         // this is the correct way to get the booking
-        $booking = Booking::whereHas('order', function($query) use ($user) {
-            $query->where('orderable_id', $user->typeable_id)
-                ->where('orderable_type', $user->typeable_type);
-        })->with('bookingDetails')->first();
 
-        if(!isset($booking)){
+        $booking = Booking::join('orders', 'bookings.order_id', '=', 'orders.id')
+            ->whereHas('order', function($query) use ($user) {
+                $query->where('orderable_id', $user->typeable_id)
+                    ->where('orderable_type', $user->typeable_type);
+            })
+            ->where('orders.status', '!=', 'completed')
+            ->get();
+        
+        $bookingData = [
+            'booking' => $booking,
+            // 'booking_details' => $booking->booking_details
+        ];
+
+        if(!isset($bookingData)){
             return $this->error('Booking not found', 404);
         }
 
-        return $this->success($booking, 'User Booking', 200);
+        return $this->success($bookingData, 'User Booking', 200);
     }
 }
