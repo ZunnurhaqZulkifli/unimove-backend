@@ -62,7 +62,7 @@ return new class extends Migration
 
             $table->string('status')->default('active');
             $table->foreignId('order_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('accepted_by')->nullable()->constrained('drivers')->nullOnDelete();
+            $table->foreignId('accepted_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

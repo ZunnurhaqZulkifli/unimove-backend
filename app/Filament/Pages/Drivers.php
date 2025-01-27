@@ -34,10 +34,6 @@ class Drivers extends Page implements HasForms, HasInfolists
         $this->model = Driver::find(1);
         $this->totalCars = $this->model->vehicles->count();
         $this->mileage = Vehicle::where('driver_id', $this->model->id)->sum('mileage');
-
-        // if($this->totalCars > 0){
-        //     dd($this->totalCars);
-        // }
     }
 
     public function infolist(Infolist $infoList): InfoList

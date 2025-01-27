@@ -9,7 +9,7 @@ enum BookingStatus: string
     case ACCEPTED = 'accepted';
     case ONGOING = 'ongoing';
     case CANCELLED = 'cancelled';
-    case DONE = 'done';
+    case COMPLETED = 'completed';
 
     public static function options(): array
     {
@@ -19,7 +19,7 @@ enum BookingStatus: string
             self::ACCEPTED,
             self::ONGOING,
             self::CANCELLED,
-            self::DONE,
+            self::COMPLETED,
         ];
     }
 }

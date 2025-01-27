@@ -35,7 +35,12 @@ class BookingDetail extends Model
 
     public function dropOff()
     {
-        return $this->belongsTo(Destination::class, 'dropoff_id');
+        return $this->belongsTo(Destination::class, 'dropoff_to');
+    }
+
+    public function pickupFrom()
+    {
+        return $this->belongsTo(Destination::class, 'pickup_from');
     }
 
     public function vehicle()

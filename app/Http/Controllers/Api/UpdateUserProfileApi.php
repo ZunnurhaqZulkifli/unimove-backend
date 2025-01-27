@@ -9,6 +9,7 @@ use App\Models\Driver;
 use App\Models\Staff;
 use App\Models\Student;
 use App\Models\User;
+use App\Models\Vehicle;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,6 +101,18 @@ class UpdateUserProfileApi extends BaseApiController
             ]);
 
             $user->save();
+
+
+            if($data['profile_type'] == 'App\Models\Driver') {            
+                Vehicle::create([
+                    'driver_id' => $model->id,
+                    'plate_no' => 'XXX' . rand(1000, 9999),
+                    'model_id' => rand(1, 84),
+                    'brand_id' => rand(1, 10),
+                    'color' => 'black',
+                    'mileage' => rand(1000, 999999),
+                ]);
+            }
 
             Wallet::create([
                 'user_id' => $user->id,

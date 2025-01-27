@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 
-class GetDestinationsApi extends BaseApiController
+class DestinationsApi extends BaseApiController
 {
     public function index()
     {
