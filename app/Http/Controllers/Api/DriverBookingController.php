@@ -112,8 +112,11 @@ class DriverBookingController extends BaseApiController
             }
         }
 
+        $b = Booking::find($bookingDetail->booking_id)->first();
+        $o = Order::find($b->order_id)->first();
+
         $customer_profile = User::where('typeable_type', 'App\Models\Student')
-            ->where('typeable_id', $bookingDetail->user_id)
+            ->where('typeable_id', $o->orderable_id)
             ->first();
 
         if ($customer_profile) {

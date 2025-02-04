@@ -50,7 +50,8 @@ class CustomerOrderController extends BaseApiController
         $c_data = json_decode($data, true);
 
         $order = new Order();
-        $order->owner()->associate($user->profile);
+        $order->orderable_type = $user->typeable_type;
+        $order->orderable_id = $user->typeable_id;
         $order->pickup_from = $request->pickup_from;
         $order->dropoff_to = $request->dropoff_to;
         $order->status = OrderStatus::NEW;
@@ -80,8 +81,7 @@ class CustomerOrderController extends BaseApiController
             return $this->error([], 'Order Already Accepted', 400);
         }
 
-        $order->status = OrderStatus::CANCELLED;
-        $order->save();
+        $order->delete();
 
         return $this->success($order, 'Order Cancelled Successfully', 200);
     }

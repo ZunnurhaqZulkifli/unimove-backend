@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\BiometricUserApiController;
 use App\Http\Controllers\Api\CalculateDataApi;
 use App\Http\Controllers\Api\DeleteUserApi;
 use App\Http\Controllers\Api\GetDashboardImagesApi;
+use App\Http\Controllers\Api\ChangePasscodeController;
 use App\Http\Controllers\Api\DestinationsApi;
 use App\Http\Controllers\Api\UserWalletsApi;
 use App\Http\Controllers\Api\LoginUserApi;
@@ -54,6 +55,7 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
 
     Route::post('logout', [LogoutUserApi::class, 'logout'])->name('logout');
     Route::post('delete-user', [DeleteUserApi::class, 'delete'])->name('delete-user');
+    Route::post('change-passcode', [ChangePasscodeController::class, 'index'])->name('change-passcode');
 });
 
 // student / staff / drivers

@@ -53,7 +53,7 @@ class UserRidesHistoryApi extends BaseApiController
         $bookings = Booking::join('orders', 'bookings.order_id', '=', 'orders.id')
             ->whereHas('order', function($query) use ($user) {
                 $query->where('orderable_id', $user->typeable_id)
-                    ->where('orderable_type', $user->typeable_type);
+                    ->whereIn('orderable_type', [$user->typeable_type]);
             })
             ->whereIn('bookings.status', ['completed'])
             ->get();

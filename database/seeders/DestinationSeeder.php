@@ -25,7 +25,7 @@ class DestinationSeeder extends Seeder
                 'status'          => 'active',
             ],
             [
-                'name'            => 'Admin',
+                'name'            => 'Administration Building',
                 'code'            => 'ADM',
                 'price'           => 3.00,
                 'x'               => 0,
